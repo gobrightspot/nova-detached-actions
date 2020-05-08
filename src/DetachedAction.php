@@ -3,6 +3,7 @@
 namespace Brightspot\Nova\Tools\DetachedActions;
 
 use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Nova;
 
 abstract class DetachedAction extends Action
 {
