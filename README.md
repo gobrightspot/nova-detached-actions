@@ -108,6 +108,32 @@ public function actions(Request $request)
 }
 ```
 
+### Usage with the Laravel Excel `DownloadExcel` action
+
+You can easily integrate the `DetachedAction` tool with the `DownloadExcel` action by simply passing some additional data along using `withMeta()`.
+
+```php
+...
+    /**
+      * Get the actions available for the resource.
+      *
+      * @param  \Illuminate\Http\Request  $request
+      * @return array
+      */
+     public function actions(Request $request)
+     {
+         return [
+             (new DownloadExcel)->withHeadings()->askForWriterType()->withMeta([
+                 'detachedAction' => true,
+                 'label' => 'Export'
+             ])->confirmButtonText('Export'),
+         ];
+     }
+ ...
+ ```
+
+
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE) for more information.
