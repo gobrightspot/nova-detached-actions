@@ -108,9 +108,9 @@ public function actions(Request $request)
 }
 ```
 
-### Usage with the Laravel Excel `DownloadExcel` action
+### Usage with the Laravel Nova Excel `DownloadExcel` action
 
-You can easily integrate the `DetachedAction` tool with the `DownloadExcel` action by simply passing some additional data along using `withMeta()`.
+You can easily integrate the `DetachedAction` tool with the [Laravel Nova Excel](https://github.com/Maatwebsite/Laravel-Nova-Excel) `DownloadExcel` action by simply passing some additional data along using `withMeta()`.
 
 ```php
 ...
