@@ -7,6 +7,7 @@ use Laravel\Nova\Actions\DispatchAction;
 use Laravel\Nova\Actions\ActionMethod;
 use Laravel\Nova\Exceptions\MissingActionHandlerException;
 use Laravel\Nova\Http\Requests\ActionRequest;
+use Laravel\Nova\Nova;
 
 abstract class DetachedAction extends Action
 {
