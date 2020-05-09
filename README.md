@@ -18,15 +18,24 @@ composer require gobrightspot/nova-detached-actions
 Register the tool in `NovaServiceProvider`:
 
 ```php
+
 use Brightspot\Nova\Tools\DetachedActions\DetachedActions;
+
+class NovaServiceProvider extends NovaApplicationServiceProvider
+{
 ...
+    /**
+     * Get the tools that should be listed in the Nova sidebar.
+     *
+     * @return array
+     */
     public function tools()
     {
         return [
             new DetachedActions,
-            ...
         ];
     }
+}
 ```
 
 ## Usage
@@ -36,6 +45,14 @@ Create a custom Nova Action file:
 ```bash
 php artisan nova:action ExportUsers
 ```
+
+Instead of extending the `ExportUsers` class with the `Laravel\Nova\Actions\Action` class, swap it with the `Brightspot\Nova\Tools\DetachedActions\DetachedAction` class.
+
+Since we won't receive a collection of `$models`, you can remove the variable from the `handle` method, so that the signature is `public function handle(ActionFields $fields)`.
+
+You can also customize the button label, by overriding the `label()` method. If you do not override the label, it will 'humanize' the class name, in the example `ExportUsers` would become `Export Users`.
+
+Here's a full example:
 
 ```php
 <?php
