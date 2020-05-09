@@ -57,14 +57,14 @@ class ExportUsers extends DetachedAction
     use InteractsWithQueue, Queueable, SerializesModels;
     
     /**
-	 * Get the displayable label of the button.
-	 *
-	 * @return string
-	 */
+     * Get the displayable label of the button.
+     *
+     * @return string
+     */
     public function label()
     {
-		return __('Export Users');
-	}
+        return __('Export Users');
+    }
 
     /**
      * Perform the action.
