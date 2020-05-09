@@ -1,11 +1,11 @@
 .btn-detached-action {
     margin-left: .75rem;
     color: #fff;
-    background-color: #3c4b5f;
+    background-color: var(--primary, #3c4b5f);
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
 .btn-detached-action:hover {
-    background-color: #22292f;
+    background-color: var(--primary-dark, #22292f);
 }
