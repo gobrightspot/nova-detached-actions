@@ -42,13 +42,12 @@ php artisan nova:action ExportUsers
 
 namespace App\Nova\Actions;
 
-use Illuminate\Bus\Queueable;
 use Brightspot\Nova\Tools\DetachedActions\DetachedAction;
-use Illuminate\Support\Collection;
-use Laravel\Nova\Fields\ActionFields;
+use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Laravel\Nova\Fields\ActionFields;
 
 class ExportUsers extends DetachedAction
 {
@@ -67,7 +66,8 @@ class ExportUsers extends DetachedAction
     /**
      * Perform the action.
      *
-     * @param  \Laravel\Nova\Fields\ActionFields  $fields
+     * @param  ActionFields  $fields
+     *
      * @return mixed
      */
     public function handle(ActionFields $fields)
