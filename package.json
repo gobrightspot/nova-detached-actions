@@ -14,7 +14,7 @@
         "laravel-mix": "^1.0"
     },
     "dependencies": {
-        "laravel-nova": "^1.0.8",
-        "vue": "^2.5.0"
+        "laravel-nova": "^1.2.2",
+        "vue": "^2.6.11"
     }
 }
