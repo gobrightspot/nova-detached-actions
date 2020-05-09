@@ -6,7 +6,7 @@
             @click.prevent="openConfirmationModal(action)"
             class="btn btn-default btn-detached-action"
             :title="action.label"
-            v-for="action in detachedActions" 
+            v-for="action in detachedActions"
             :key="action.uriKey"
         >
             <span>{{ __(action.label) }}</span>
@@ -246,3 +246,19 @@ export default {
 
 }
 </script>
+
+<style lang="scss" scoped>
+
+    .btn-detached-action {
+        margin-left: .75rem;
+        color: #fff;
+        background-color: var(--primary, #3c4b5f);
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .btn-detached-action:hover {
+        background-color: var(--primary-dark, #22292f);
+    }
+
+</style>
