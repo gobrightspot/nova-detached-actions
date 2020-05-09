@@ -15,29 +15,6 @@ You can install the package in to a Laravel app that uses [Nova](https://nova.la
 composer require gobrightspot/nova-detached-actions
 ```
 
-Register the tool in `NovaServiceProvider`:
-
-```php
-
-use Brightspot\Nova\Tools\DetachedActions\DetachedActions;
-
-class NovaServiceProvider extends NovaApplicationServiceProvider
-{
-...
-    /**
-     * Get the tools that should be listed in the Nova sidebar.
-     *
-     * @return array
-     */
-    public function tools()
-    {
-        return [
-            new DetachedActions,
-        ];
-    }
-}
-```
-
 ## Usage
 
 Create a custom Nova Action file:
