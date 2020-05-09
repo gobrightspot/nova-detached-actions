@@ -14,7 +14,7 @@ class DetachedActions extends Tool
      */
     public function boot()
     {
-        Nova::script('detached-actions', __DIR__.'/../dist/js/tool.js');
-        Nova::style('detached-actions', __DIR__.'/../dist/css/tool.css');
+        Nova::script('detached-actions', __DIR__. '/../dist/js/tool.js');
+        Nova::style('detached-actions', __DIR__. '/../dist/css/tool.css');
     }
 }
