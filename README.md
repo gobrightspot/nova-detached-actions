@@ -20,15 +20,13 @@ Register the tool in `NovaServiceProvider`:
 ```php
 use Brightspot\Nova\Tools\DetachedActions\DetachedActions;
 ...
-
-public function tools()
+    public function tools()
     {
         return [
             new DetachedActions,
             ...
         ];
     }
-
 ```
 
 ## Usage
@@ -94,18 +92,20 @@ class ExportUsers extends DetachedAction
 Register the action on your resource:
 
 ```php
-/**
- * Get the actions available for the resource.
- *
- * @param  \Illuminate\Http\Request  $request
- * @return array
- */
-public function actions(Request $request)
-{
-    return [
-        new App\Nova\Actions\ExportUsers
-    ];
-}
+...
+    /**
+     * Get the actions available for the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function actions(Request $request)
+    {
+        return [
+            new App\Nova\Actions\ExportUsers
+        ];
+    }
+...
 ```
 
 ### Usage with the Laravel Nova Excel `DownloadExcel` action
