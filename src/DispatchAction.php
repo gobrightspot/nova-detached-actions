@@ -2,12 +2,13 @@
 
 namespace Brightspot\Nova\Tools\DetachedActions;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Queue;
-use Laravel\Nova\Fields\ActionFields;
-use Laravel\Nova\Http\Requests\ActionRequest;
 use Laravel\Nova\Nova;
+use Laravel\Nova\Actions\Action;
+use Illuminate\Support\Collection;
+use Laravel\Nova\Actions\Transaction;
+use Laravel\Nova\Fields\ActionFields;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Laravel\Nova\Http\Requests\ActionRequest;
 
 class DispatchAction extends \Laravel\Nova\Actions\DispatchAction
 {
