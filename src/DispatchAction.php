@@ -2,6 +2,7 @@
 
 namespace Brightspot\Nova\Tools\DetachedActions;
 
+use Laravel\Nova\Actions\DispatchAction as NovaDispatchAction;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Actions\Action;
 use Illuminate\Support\Collection;
@@ -9,18 +10,20 @@ use Laravel\Nova\Actions\Transaction;
 use Laravel\Nova\Fields\ActionFields;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Laravel\Nova\Http\Requests\ActionRequest;
+use Throwable;
 
-class DispatchAction extends \Laravel\Nova\Actions\DispatchAction
+class DispatchAction extends NovaDispatchAction
 {
     /**
      * Dispatch the given action.
      *
-     * @param  \Laravel\Nova\Http\Requests\ActionRequest $request
-     * @param  \Laravel\Nova\Actions\Action $action
-     * @param  string $method
-     * @param  \Illuminate\Support\Collection $models
-     * @param  \Laravel\Nova\Fields\ActionFields $fields
+     * @param ActionRequest $request
+     * @param Action $action
+     * @param string $method
+     * @param Collection $models
+     * @param ActionFields $fields
      * @return mixed
+     * @throws Throwable
      */
     public static function forModels(
         ActionRequest $request,

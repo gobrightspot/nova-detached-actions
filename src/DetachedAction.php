@@ -7,6 +7,7 @@ use Laravel\Nova\Actions\ActionMethod;
 use Laravel\Nova\Exceptions\MissingActionHandlerException;
 use Laravel\Nova\Http\Requests\ActionRequest;
 use Laravel\Nova\Nova;
+use Throwable;
 
 abstract class DetachedAction extends Action
 {
@@ -79,9 +80,11 @@ abstract class DetachedAction extends Action
     /**
      * Execute the action for the given request.
      *
-     * @param  \Laravel\Nova\Http\Requests\ActionRequest  $request
+     * @param ActionRequest $request
+     *
      * @return mixed
      * @throws MissingActionHandlerException
+     * @throws Throwable
      */
     public function handleRequest(ActionRequest $request)
     {
@@ -156,6 +159,7 @@ abstract class DetachedAction extends Action
     public function onlyOnIndex($value = true)
     {
         parent::onlyOnIndex($value);
+
         $this->showOnIndexToolbar = $value;
         $this->showOnDetailToolbar = ! $value;
 
@@ -202,6 +206,7 @@ abstract class DetachedAction extends Action
     public function onlyOnDetail($value = true)
     {
         parent::onlyOnDetail($value);
+
         $this->showOnIndexToolbar = false;
         $this->showOnDetailToolbar = true;
 
