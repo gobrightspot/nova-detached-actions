@@ -18,6 +18,13 @@ abstract class DetachedAction extends Action
     public $showOnIndexToolbar = true;
 
     /**
+     * Indicates if this action is only available on the custom detail toolbar.
+     *
+     * @var bool
+     */
+    public $showOnDetailToolbar = true;
+
+    /**
      * Indicates if this action is only available on the resource index view.
      *
      * @var bool
@@ -43,7 +50,7 @@ abstract class DetachedAction extends Action
      *
      * @var bool
      */
-    public $showOnDetail = true;
+    public $showOnDetail = false;
 
     /**
      * Indicates if this action is available on the resource's table row.
@@ -100,11 +107,137 @@ abstract class DetachedAction extends Action
     /**
      * Determine if the action is to be shown on the custom index toolbar.
      *
+     * @return self
+     */
+    public function showOnIndexToolbar()
+    {
+        $this->showOnIndexToolbar = true;
+
+        return $this;
+    }
+
+    /**
+     * Determine if the action is to be shown only on the custom index toolbar.
+     *
+     * @return self
+     */
+    public function onlyOnIndexToolbar()
+    {
+        $this->showOnIndexToolbar = true;
+        $this->showOnDetailToolbar = false;
+        $this->onlyOnIndex = false;
+        $this->onlyOnDetail = false;
+        $this->showOnIndex = false;
+        $this->showOnDetail = false;
+        $this->showOnTableRow = false;
+
+        return $this;
+    }
+
+    /**
+     * Determine if the action is not to be shown on the index view.
+     *
+     * @return $this
+     */
+    public function exceptOnIndexToolbar()
+    {
+        $this->showOnIndexToolbar = false;
+
+        return $this;
+    }
+
+    /**
+     * Determine if the action is to be shown on the custom index toolbar.
+     *
+     * @param bool $value
+     *
+     * @return self
+     */
+    public function onlyOnIndex($value = true)
+    {
+        parent::onlyOnIndex($value);
+        $this->showOnIndexToolbar = $value;
+        $this->showOnDetailToolbar = ! $value;
+
+        return $this;
+    }
+
+    /**
+     * Determine if the action is to be shown on the custom detil toolbar.
+     *
+     * @return self
+     */
+    public function showOnDetailToolbar()
+    {
+        $this->showOnDetailToolbar = true;
+
+        return $this;
+    }
+
+    /**
+     * Determine if the action is to be shown only on the custom detail toolbar.
+     *
+     * @return self
+     */
+    public function onlyOnDetailToolbar()
+    {
+        $this->showOnDetailToolbar = true;
+        $this->showOnIndexToolbar = false;
+        $this->onlyOnIndex = false;
+        $this->onlyOnDetail = false;
+        $this->showOnIndex = false;
+        $this->showOnDetail = false;
+        $this->showOnTableRow = false;
+
+        return $this;
+    }
+
+    /**
+     * Determine if the action is to be shown only on the detail view.
+     *
+     * @param bool $value
+     *
+     * @return self
+     */
+    public function onlyOnDetail($value = true)
+    {
+        parent::onlyOnDetail($value);
+        $this->showOnIndexToolbar = false;
+        $this->showOnDetailToolbar = true;
+
+        return $this;
+    }
+
+    /**
+     * Determine if the action is not to be shown on the detail view.
+     *
+     * @return $this
+     */
+    public function exceptOnDetailToolbar()
+    {
+        $this->showOnDetailToolbar = false;
+
+        return $this;
+    }
+
+    /**
+     * Determine if the action is to be shown on the custom index toolbar.
+     *
      * @return bool
      */
     public function shownOnIndexToolbar()
     {
         return $this->showOnIndexToolbar;
+    }
+
+    /**
+     * Determine if the action is to be shown on the custom detail toolbar.
+     *
+     * @return bool
+     */
+    public function shownOnDetailToolbar()
+    {
+        return $this->showOnDetailToolbar;
     }
 
     /**
@@ -118,6 +251,7 @@ abstract class DetachedAction extends Action
             'detachedAction' => true,
             'label' => $this->label(),
             'showOnIndexToolbar' => $this->shownOnIndexToolbar(),
+            'showOnDetailToolbar' => $this->shownOnDetailToolbar(),
         ], parent::jsonSerialize(), $this->meta());
     }
 }

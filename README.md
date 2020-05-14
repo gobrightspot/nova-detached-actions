@@ -3,7 +3,7 @@
 A Laravel Nova tool to allow for placing actions in the Nova toolbar, detached from the checkbox selection mechanism.
 
 :warning: Keep in mind, since the action is detached from the row selection checkboxes in the resource table, you will not have a collection of models to iterate over. Detached actions are intended to be independent of the selction in the table.
-
+:warning: Also, keep in mind, pivot actions are not supported and have not been tested.
 
 ![screenshot](https://i.imgur.com/S8GrNFI.png)
 
@@ -93,6 +93,7 @@ class ExportUsers extends DetachedAction
 Register the action on your resource:
 
 ```php
+<?php
 ...
     /**
      * Get the actions available for the resource.
@@ -114,6 +115,7 @@ Register the action on your resource:
 You can easily integrate the `DetachedAction` tool with the [Laravel Nova Excel](https://github.com/Maatwebsite/Laravel-Nova-Excel) `DownloadExcel` action by simply passing some additional data along using `withMeta()`.
 
 ```php
+<?php
 ...
     /**
       * Get the actions available for the resource.
