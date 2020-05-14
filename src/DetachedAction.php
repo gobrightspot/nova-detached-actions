@@ -70,6 +70,16 @@ abstract class DetachedAction extends Action
     }
 
     /**
+     * Determine if the action is to be shown on the custom index toolbar.
+     *
+     * @return bool
+     */
+    public function shownOnIndexToolbar()
+    {
+        return $this->showOnIndexToolbar;
+    }
+
+    /**
      * Prepare the action for JSON serialization.
      *
      * @return array
@@ -79,6 +89,7 @@ abstract class DetachedAction extends Action
         return array_merge([
             'detachedAction' => true,
             'label' => $this->label(),
+            'showOnIndexToolbar' => $this->shownOnIndexToolbar(),
         ], parent::jsonSerialize(), $this->meta());
     }
 }
