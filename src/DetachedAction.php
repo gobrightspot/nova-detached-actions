@@ -5,11 +5,18 @@ namespace Brightspot\Nova\Tools\DetachedActions;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Actions\ActionMethod;
 use Laravel\Nova\Exceptions\MissingActionHandlerException;
-use Laravel\Nova\Nova;
 use Laravel\Nova\Http\Requests\ActionRequest;
+use Laravel\Nova\Nova;
 
 abstract class DetachedAction extends Action
 {
+    /**
+     * Indicates if this action is only available on the custom index toolbar.
+     *
+     * @var bool
+     */
+    public $showOnIndexToolbar = true;
+
     /**
      * Indicates if this action is only available on the resource index view.
      *

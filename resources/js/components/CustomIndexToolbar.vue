@@ -105,7 +105,7 @@ export default {
                 })
                 .then(response => {
                     this.actions = _.filter(response.data.actions, action => {
-                        return !action.onlyOnDetail
+                        return action.showOnIndexToolbar
                     })
                 })
         },
