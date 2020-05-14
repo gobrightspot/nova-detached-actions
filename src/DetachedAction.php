@@ -18,11 +18,39 @@ abstract class DetachedAction extends Action
     public $showOnIndexToolbar = true;
 
     /**
+     * Indicates if this action is only available on the resource index view.
+     *
+     * @var bool
+     */
+    public $onlyOnIndex = false;
+
+    /**
+     * Indicates if this action is only available on the resource detail view.
+     *
+     * @var bool
+     */
+    public $onlyOnDetail = false;
+
+    /**
      * Indicates if this action is available on the resource index view.
      *
      * @var bool
      */
     public $showOnIndex = false;
+
+    /**
+     * Indicates if this action is available on the resource detail view.
+     *
+     * @var bool
+     */
+    public $showOnDetail = true;
+
+    /**
+     * Indicates if this action is available on the resource's table row.
+     *
+     * @var bool
+     */
+    public $showOnTableRow = false;
 
     /**
      * The displayable label of the button.
