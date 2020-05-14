@@ -15,28 +15,7 @@ You can install the package in to a Laravel app that uses [Nova](https://nova.la
 composer require gobrightspot/nova-detached-actions
 ```
 
-Register the tool in `NovaServiceProvider`:
-
-```php
-
-use Brightspot\Nova\Tools\DetachedActions\DetachedActions;
-
-class NovaServiceProvider extends NovaApplicationServiceProvider
-{
-...
-    /**
-     * Get the tools that should be listed in the Nova sidebar.
-     *
-     * @return array
-     */
-    public function tools()
-    {
-        return [
-            new DetachedActions,
-        ];
-    }
-}
-```
+The tool will be automatically registered via the `ToolServiceProvider` - Thanks @milewski
 
 ## Usage
 
@@ -51,6 +30,11 @@ Instead of extending the `ExportUsers` class with the `Laravel\Nova\Actions\Acti
 Since we won't receive a collection of `$models`, you can remove the variable from the `handle` method, so that the signature is `public function handle(ActionFields $fields)`.
 
 You can also customize the button label, by overriding the `label()` method. If you do not override the label, it will 'humanize' the class name, in the example `ExportUsers` would become `Export Users`.
+
+By default the detached action will only appear on the Index Toolbar.
+
+If you want to also show the action on the resource index view (when users select a row with a checkbox), set the `$public $showOnIndex = true;`
+If you want to also show the action on the resource detail view (when user selects the action from the dropdown), set the `$public $showOnDetail = true;`
 
 Here's a full example:
 
@@ -142,7 +126,8 @@ You can easily integrate the `DetachedAction` tool with the [Laravel Nova Excel]
          return [
              (new DownloadExcel)->withHeadings()->askForWriterType()->withMeta([
                  'detachedAction' => true,
-                 'label' => 'Export'
+                 'label' => 'Export',
+                 'showOnIndexToolbar' => true
              ])->confirmButtonText('Export'),
          ];
      }
