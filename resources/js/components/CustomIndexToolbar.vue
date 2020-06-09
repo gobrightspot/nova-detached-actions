@@ -4,7 +4,8 @@
             data-testid="import-action-confirm"
             dusk="run-import-action-button"
             @click.prevent="openConfirmationModal(action)"
-            class="btn btn-default btn-detached-action btn-detached-index-action"
+            class="btn btn-default ml-3 btn-detached-action btn-detached-index-action"
+            :class="action.classes"
             :title="action.label"
             v-for="action in detachedActions"
             :key="action.uriKey">

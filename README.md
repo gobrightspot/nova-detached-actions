@@ -136,7 +136,39 @@ You can easily integrate the `DetachedAction` tool with the [Laravel Nova Excel]
  ...
  ```
 
+### Customizing Buttons
 
+The package ships with some common sense default HTML classes that are applied to the action buttons. In the component, we automatically assign the following:
+
+```
+btn btn-default ml-3 btn-detached-action btn-detached-index-action
+```
+
+The action buttons are buttons so it makes sense to assign the `btn` and `btn-default` classes, we also want consistent spacing between buttons so we apply `ml-3` and in order to allow theme developers to set a specific class name to hook into, we apply `btn-detached-action` on both the Index and Detail views.
+
+On top of these classes, the `DetachedAction` class provides `btn-primary` as a default, that will give the buttons the default button color, i.e. blue in the default Nova theme.
+
+Furthermore, a developer can add classes on the fly, using the `extraClassesWithDefault()` and `extraClasses()` methods on the `DetachedAction` class.
+
+### The `extraClassesWithDefault()` method
+
+ If you want to keep all of the other classes but change the background color, then you probably want to use this method. It will maintain the consistent spacing between button, as well as the white text and shadow on the button. You can pass an array of single class names or multiple class names separated by spaces.
+
+```php
+    return [
+        (new ImportUsers)->extraClassesWithDefault('bg-info')
+    ];
+```
+
+### The `extraClasses()` method
+
+If you want to completely restyle the buttons then use this method. You will need to apply margins, background etc. You may want to use this method if you want to have "link style" buttons.
+
+```php
+   return [
+       (new ImportUsers)->extraClasses('no-shadow btn-link px-2')
+   ];
+```
 
 ## License
 
