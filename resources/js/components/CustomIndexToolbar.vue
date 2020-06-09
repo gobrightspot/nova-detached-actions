@@ -4,8 +4,9 @@
             data-testid="import-action-confirm"
             dusk="run-import-action-button"
             @click.prevent="determineActionStrategy(action)"
-            class="btn btn-default btn-detached-action btn-detached-index-action"
             :title="__(action.label)"
+            class="btn btn-default ml-3 btn-detached-action btn-detached-index-action"
+            :class="action.classes"
             v-for="action in detachedActions"
             :key="action.uriKey">
             <span>{{ __(action.label) }}</span>
