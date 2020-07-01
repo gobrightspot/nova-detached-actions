@@ -2,12 +2,13 @@
 
 namespace Brightspot\Nova\Tools\DetachedActions;
 
+use Throwable;
+use Laravel\Nova\Nova;
 use Laravel\Nova\Actions\Action;
 use Laravel\Nova\Actions\ActionMethod;
-use Laravel\Nova\Exceptions\MissingActionHandlerException;
+use Illuminate\Database\Eloquent\Collection;
 use Laravel\Nova\Http\Requests\ActionRequest;
-use Laravel\Nova\Nova;
-use Throwable;
+use Laravel\Nova\Exceptions\MissingActionHandlerException;
 
 abstract class DetachedAction extends Action
 {
@@ -80,7 +81,7 @@ abstract class DetachedAction extends Action
     /**
      * Execute the action for the given request.
      *
-     * @param ActionRequest $request
+     * @param  ActionRequest  $request
      *
      * @return mixed
      * @throws MissingActionHandlerException
@@ -100,7 +101,7 @@ abstract class DetachedAction extends Action
             $request,
             $this,
             $method,
-            collect([]),
+            new Collection([]),
             $fields
         );
 
@@ -152,7 +153,7 @@ abstract class DetachedAction extends Action
     /**
      * Determine if the action is to be shown on the custom index toolbar.
      *
-     * @param bool $value
+     * @param  bool  $value
      *
      * @return self
      */
@@ -199,7 +200,7 @@ abstract class DetachedAction extends Action
     /**
      * Determine if the action is to be shown only on the detail view.
      *
-     * @param bool $value
+     * @param  bool  $value
      *
      * @return self
      */
