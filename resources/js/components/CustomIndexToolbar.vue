@@ -3,7 +3,7 @@
         <button
             data-testid="import-action-confirm"
             dusk="run-import-action-button"
-            @click.prevent="openConfirmationModal(action)"
+            @click.prevent="determineActionStrategy(action)"
             class="btn btn-default btn-detached-action btn-detached-index-action"
             :title="action.label"
             v-for="action in detachedActions"
