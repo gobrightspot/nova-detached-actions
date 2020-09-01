@@ -39,13 +39,18 @@ export default {
     },
 
     /**
-     * Confirm with the user that they actually want to run the selected action.
+     * Determine whether the action should redirect or open a confirmation modal
      */
-    openConfirmationModal(action) {
-      this.selectedActionKey = action.uriKey
-      this.confirmActionModalOpened = true
-    }
+    determineActionStrategy(action) {
 
+      this.selectedActionKey = action.uriKey;
+
+      if (this.selectedAction.withoutConfirmation) {
+        this.executeAction()
+      } else {
+        this.openConfirmationModal()
+      }
+    },
   },
 
   computed: {
