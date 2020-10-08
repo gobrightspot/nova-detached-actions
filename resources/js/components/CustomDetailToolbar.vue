@@ -5,7 +5,7 @@
             dusk="run-import-action-button"
             @click.prevent="determineActionStrategy(action)"
             class="btn btn-default btn-detached-action btn-detached-detail-action"
-            :title="action.label"
+            :title="__(action.label)"
             v-for="action in detachedActions" 
             :key="action.uriKey"
         >
