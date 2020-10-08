@@ -62,6 +62,13 @@ abstract class DetachedAction extends Action
     public $showOnTableRow = false;
 
     /**
+     * Indicates if the action can be run without any models.
+     *
+     * @var bool
+     */
+    public $standalone = true;
+
+    /**
      * The displayable label of the button.
      *
      * @var string
@@ -76,36 +83,6 @@ abstract class DetachedAction extends Action
     public function label()
     {
         return $this->label ?: Nova::humanize($this);
-    }
-
-    /**
-     * Execute the action for the given request.
-     *
-     * @param  ActionRequest  $request
-     *
-     * @return mixed
-     * @throws MissingActionHandlerException
-     * @throws Throwable
-     */
-    public function handleRequest(ActionRequest $request)
-    {
-        $method = ActionMethod::determine($this, $request->targetModel());
-
-        if (! method_exists($this, $method)) {
-            throw MissingActionHandlerException::make($this, $method);
-        }
-
-        $fields = $request->resolveFields();
-
-        $results = DispatchAction::forModels(
-            $request,
-            $this,
-            $method,
-            new Collection([]),
-            $fields
-        );
-
-        return $this->handleResult($fields, [$results]);
     }
 
     /**
