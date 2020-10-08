@@ -15,14 +15,18 @@ export default {
    * Mount the component and retrieve its initial data.
    */
   async created() {
-    this.getActions()
+    this.getDetachedActions()
+
+    this.$on('actionExecuted', () => {
+      Nova.$emit('refresh-resources')
+    })
   },
 
   methods: {
     /**
      * Get the actions available for the current resource.
      */
-    getActions() {
+    getDetachedActions() {
       this.actionsList = []
       return Nova.request()
         .get(`/nova-api/${this.resourceName}/actions`, {
