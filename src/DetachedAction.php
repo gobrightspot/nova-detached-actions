@@ -2,13 +2,9 @@
 
 namespace Brightspot\Nova\Tools\DetachedActions;
 
-use Throwable;
 use Laravel\Nova\Nova;
+use Illuminate\Support\Arr;
 use Laravel\Nova\Actions\Action;
-use Laravel\Nova\Actions\ActionMethod;
-use Illuminate\Database\Eloquent\Collection;
-use Laravel\Nova\Http\Requests\ActionRequest;
-use Laravel\Nova\Exceptions\MissingActionHandlerException;
 
 abstract class DetachedAction extends Action
 {
@@ -74,6 +70,20 @@ abstract class DetachedAction extends Action
      * @var string
      */
     public $label;
+
+    /**
+     * Extra CSS classes to apply to detached action button.
+     *
+     * @var array
+     */
+    public $extraClasses = [];
+
+    /**
+     * The default CSS classes to apply to detached action button.
+     *
+     * @var array
+     */
+    public $defaultClasses = ['btn-primary'];
 
     /**
      * Get the displayable label of the button.
@@ -224,6 +234,71 @@ abstract class DetachedAction extends Action
     }
 
     /**
+     * The default detached action classes.
+     *
+     * @return mixed
+     */
+    public function defaultClasses()
+    {
+        return $this->defaultClasses;
+    }
+
+    /**
+     * Set the extra CSS classes to be applied to the detached action button.
+     *
+     * @param mixed $classes
+     * @return $this
+     */
+    public function extraClasses($classes)
+    {
+        $this->extraClasses = $this->prepareClasses(Arr::wrap($classes));
+
+        return $this;
+    }
+
+    /**
+     * Set the extra CSS classes to be applied to the detached action button.
+     *
+     * @param mixed $classes
+     * @return $this
+     */
+    public function extraClassesWithDefault($classes)
+    {
+        $this->extraClasses = $this->prepareClasses(array_merge(
+            Arr::wrap($this->defaultClasses),
+            Arr::wrap($classes)
+        ));
+
+        return $this;
+    }
+
+    /**
+     * Get the display classes for the detached action button.
+     *
+     * @return array
+     */
+    public function getClasses()
+    {
+        if (empty($this->extraClasses)) {
+            return $this->prepareClasses($this->defaultClasses);
+        }
+
+        return $this->prepareClasses($this->extraClasses);
+    }
+
+    /**
+     * Prepare the classes so that a string or an array of strings is formatted correctly.
+     *
+     * @param string|array $classes
+     *
+     * @return array
+     */
+    protected function prepareClasses($classes)
+    {
+        return array_filter(array_map('trim', Arr::wrap($classes)));
+    }
+
+    /**
      * Prepare the action for JSON serialization.
      *
      * @return array
@@ -235,6 +310,7 @@ abstract class DetachedAction extends Action
             'label' => $this->label(),
             'showOnIndexToolbar' => $this->shownOnIndexToolbar(),
             'showOnDetailToolbar' => $this->shownOnDetailToolbar(),
+            'classes' => $this->getClasses(),
         ], parent::jsonSerialize(), $this->meta());
     }
 }
