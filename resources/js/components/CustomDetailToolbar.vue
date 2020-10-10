@@ -5,16 +5,12 @@
             dusk="run-import-action-button"
             @click.prevent="determineActionStrategy(action)"
             :title="__(action.label)"
-            :class="action.classes"
             class="btn btn-default ml-3 btn-detached-action btn-detached-detail-action"
+            :class="action.classes"
             v-for="action in detachedActions"
-            :key="action.uriKey"
-        >
+            :key="action.uriKey">
             <span>{{ __(action.label) }}</span>
         </button>
-
-        <!-- Action Confirmation Modal -->
-        <!-- <portal to="modals"> -->
         <transition name="fade">
             <component
                 :is="selectedAction.component"
@@ -28,7 +24,6 @@
                 @close="confirmActionModalOpened = false"
             />
         </transition>
-        <!-- </portal> -->
     </div>
 </template>
 
