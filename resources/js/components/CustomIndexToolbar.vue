@@ -1,16 +1,17 @@
 <template>
-    <div class="flex w-full justify-end items-center mx-3">
-        <button
-            data-testid="import-action-confirm"
-            dusk="run-import-action-button"
-            @click.prevent="determineActionStrategy(action)"
-            :title="__(action.label)"
-            class="btn btn-default ml-3 btn-detached-action btn-detached-index-action"
-            :class="action.classes"
-            v-for="action in detachedActions"
-            :key="action.uriKey">
-            <span>{{ __(action.label) }}</span>
-        </button>
+    <div class="flex w-full justify-end items-center mr-3 ml-1">
+        <invisible-actions
+            v-if="shouldShowInvisibleActions"
+            :actions="invisibleActions.reverse()"
+            :show-arrow="showInvisibleActionsArrow"
+            :icon-type="invisibleActionsIcon"
+            @dropdown-link-click="handleClick"
+        ></invisible-actions>
+        <action-button
+            v-for="action in visibleActions.reverse()"
+            :key="action.uriKey"
+            :action="action"
+            @action-button-clicked="handleClick"></action-button>
         <transition name="fade">
             <component
                 :is="selectedAction.component"
@@ -27,14 +28,16 @@
 </template>
 <script>
   import DetachedAction from "../mixins/DetachedAction";
+  import ActionLink from "./ActionButton";
 
   export default {
-    mixins: [DetachedAction],
+      components: {ActionLink},
+      mixins: [DetachedAction],
 
-    methods: {
-      handleResponse(response) {
-        this.actionsList = _.filter(response.data.actions, action => action.showOnIndexToolbar)
+      methods: {
+          handleResponse(response) {
+              this.actionsList = _.filter(response.data.actions, action => action.showOnIndexToolbar)
+          }
       }
-    }
   }
 </script>

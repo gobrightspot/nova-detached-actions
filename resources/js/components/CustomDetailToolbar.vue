@@ -1,16 +1,17 @@
 <template>
     <div class="flex w-full justify-end items-center">
-        <button
-            data-testid="import-action-confirm"
-            dusk="run-import-action-button"
-            @click.prevent="determineActionStrategy(action)"
-            :title="__(action.label)"
-            class="btn btn-default ml-3 btn-detached-action btn-detached-detail-action"
-            :class="action.classes"
-            v-for="action in detachedActions"
-            :key="action.uriKey">
-            <span>{{ __(action.label) }}</span>
-        </button>
+        <invisible-actions
+            v-if="shouldShowInvisibleActions"
+            :actions="invisibleActions.reverse()"
+            :show-arrow="showInvisibleActionsArrow"
+            :icon-type="invisibleActionsIcon"
+            @dropdown-link-click="handleClick"
+        ></invisible-actions>
+        <action-button
+            v-for="action in visibleActions.reverse()"
+            :key="action.uriKey"
+            :action="action"
+            @action-button-clicked="handleClick"></action-button>
         <transition name="fade">
             <component
                 :is="selectedAction.component"
@@ -28,15 +29,15 @@
 </template>
 
 <script>
-  import DetachedAction from "../mixins/DetachedAction";
+import DetachedAction from "../mixins/DetachedAction";
 
-  export default {
+export default {
     mixins: [DetachedAction],
 
     methods: {
-      handleResponse(response) {
-        this.actionsList = _.filter(response.data.actions, action => action.showOnDetailToolbar)
-      }
+        handleResponse(response) {
+            this.actionsList = _.filter(response.data.actions, action => action.showOnDetailToolbar)
+        }
     }
-  }
+}
 </script>

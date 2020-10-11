@@ -6,9 +6,11 @@ export default {
   mixins: [HandlesActions, InteractsWithResourceInformation],
 
   data: () => ({
+    visibleActionsDefault: 3,
     actionsList: [],
     selectedResources: 'all',
     confirmActionModalOpened: false,
+    invisibleActionsOpen: false,
   }),
 
   /**
@@ -55,6 +57,15 @@ export default {
         this.openConfirmationModal()
       }
     },
+
+    /**
+     * Handle a click on an action.
+     *
+     * @param {Object} action
+     */
+    handleClick(action) {
+      return this.determineActionStrategy(action);
+    },
   },
 
   computed: {
@@ -66,10 +77,60 @@ export default {
     },
 
     /**
+     * Get the visible detached actions.
+     */
+    visibleActions() {
+      return this.visibleActionsLimit == 0
+        ? []
+        : this.detachedActions.slice(0, this.visibleActionsLimit)
+    },
+
+    /**
+     * Get the invisible detached actions.
+     */
+    invisibleActions() {
+      return this.detachedActions.slice(this.visibleActionsLimit)
+    },
+
+    /**
+     * Get the visible actions limit.
+     */
+    visibleActionsLimit() {
+      return this.resourceInformation.hasOwnProperty('visibleActionsLimit')
+        ? this.resourceInformation.visibleActionsLimit
+        : this.visibleActionsDefault;
+    },
+
+    /**
      * Get all of the available actions.
      */
     allActions() {
       return this.actionsList
+    },
+
+    /**
+     * Show the arrow to the right of the dropdown trigger.
+     */
+    showInvisibleActionsArrow() {
+      return this.resourceInformation.hasOwnProperty('showInvisibleActionsArrow')
+        ? this.resourceInformation.showInvisibleActionsArrow
+        : false
+    },
+
+    /**
+     * Specify the icon to use on the dropdown trigger.
+     */
+    invisibleActionsIcon() {
+      return this.resourceInformation.hasOwnProperty('invisibleActionsIcon')
+          ? this.resourceInformation.invisibleActionsIcon
+          : 'hero-more-horiz'
+    },
+
+    /**
+     * Determine whether to show the dropdown trigger.
+     */
+    shouldShowInvisibleActions() {
+      return this.detachedActions.length > this.visibleActionsLimit
     }
   }
 }

@@ -79,6 +79,20 @@ abstract class DetachedAction extends Action
     public $extraClasses = [];
 
     /**
+     * The icon type.
+     *
+     * @var string
+     */
+    public $icon = '';
+
+    /**
+     * CSS classes to customize the display of an icon in a button.
+     *
+     * @var string
+     */
+    public $iconClasses = '';
+
+    /**
      * The default CSS classes to apply to detached action button.
      *
      * @var array
@@ -155,7 +169,7 @@ abstract class DetachedAction extends Action
     }
 
     /**
-     * Determine if the action is to be shown on the custom detil toolbar.
+     * Determine if the action is to be shown on the custom detail toolbar.
      *
      * @return self
      */
@@ -286,6 +300,20 @@ abstract class DetachedAction extends Action
         return $this->prepareClasses($this->extraClasses);
     }
 
+    public function icon($type)
+    {
+        $this->icon = $type;
+
+        return $this;
+    }
+
+    public function iconClasses($classes)
+    {
+        $this->iconClasses = $this->prepareClasses($classes);
+
+        return $this;
+    }
+
     /**
      * Prepare the classes so that a string or an array of strings is formatted correctly.
      *
@@ -311,6 +339,8 @@ abstract class DetachedAction extends Action
             'showOnIndexToolbar' => $this->shownOnIndexToolbar(),
             'showOnDetailToolbar' => $this->shownOnDetailToolbar(),
             'classes' => $this->getClasses(),
+            'icon' => $this->icon,
+            'iconClasses' => $this->iconClasses,
         ], parent::jsonSerialize(), $this->meta());
     }
 }
