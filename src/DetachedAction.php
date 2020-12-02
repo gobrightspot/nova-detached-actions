@@ -5,6 +5,9 @@ namespace Brightspot\Nova\Tools\DetachedActions;
 use Laravel\Nova\Nova;
 use Illuminate\Support\Arr;
 use Laravel\Nova\Actions\Action;
+use Laravel\Nova\Actions\ActionMethod;
+use Laravel\Nova\Http\Requests\ActionRequest;
+use Laravel\Nova\Exceptions\MissingActionHandlerException;
 
 abstract class DetachedAction extends Action
 {
@@ -107,6 +110,54 @@ abstract class DetachedAction extends Action
     public function label()
     {
         return $this->label ?: Nova::humanize($this);
+    }
+
+    /**
+     * Execute the action for the given request.
+     *
+     * @param  \Laravel\Nova\Http\Requests\ActionRequest  $request
+     * @return mixed
+     * @throws MissingActionHandlerException
+     */
+    public function handleRequest(ActionRequest $request)
+    {
+        $method = ActionMethod::determine($this, $request->targetModel());
+
+        if (! method_exists($this, $method)) {
+            throw MissingActionHandlerException::make($this, $method);
+        }
+
+        $wasExecuted = false;
+
+        $fields = $request->resolveFields();
+
+        if (! $this->standalone) {
+            $results = $request->chunks(
+                static::$chunkCount, function ($models) use ($fields, $request, $method, &$wasExecuted) {
+                    $models = $models->filterForExecution($request);
+
+                    if (count($models) > 0) {
+                        $wasExecuted = true;
+
+                        return DispatchAction::forModels(
+                            $request, $this, $method, $models, $fields
+                        );
+                    }
+                }
+            );
+        }
+        else {
+            $wasExecuted = true;
+            $results = DispatchAction::forModels(
+                $request, $this, $method, collect([]), $fields
+            );
+        }
+
+        if (! $wasExecuted) {
+            return static::danger(__('Sorry! You are not authorized to perform this action.'));
+        }
+
+        return $this->handleResult($fields, $results);
     }
 
     /**
