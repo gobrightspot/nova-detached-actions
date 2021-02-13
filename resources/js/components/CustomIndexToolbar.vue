@@ -23,6 +23,12 @@
                 :errors="errors"
                 @confirm="executeAction"
                 @close="confirmActionModalOpened = false"/>
+            <component
+                :is="actionResponseData.modal"
+                @close="closeActionResponseModal"
+                v-if="showActionResponseModal"
+                :data="actionResponseData"
+            />
         </transition>
     </div>
 </template>
