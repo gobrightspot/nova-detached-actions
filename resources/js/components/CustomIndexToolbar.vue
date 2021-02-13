@@ -22,7 +22,8 @@
                 :action="selectedAction"
                 :errors="errors"
                 @confirm="executeAction"
-                @close="confirmActionModalOpened = false"/>
+                @close="confirmActionModalOpened = false"
+            />
             <component
                 :is="actionResponseData.modal"
                 @close="closeActionResponseModal"
