@@ -12,7 +12,8 @@
             :key="action.uriKey"
             :action="action"
             @action-button-clicked="handleClick"></action-button>
-        <transition name="fade">
+        <!-- Action confirmation and response modals -->
+        <portal to="modals" transition="fade-transition">
             <component
                 :is="selectedAction.component"
                 :working="working"
@@ -30,7 +31,7 @@
                 v-if="showActionResponseModal"
                 :data="actionResponseData"
             />
-        </transition>
+        </portal>
     </div>
 </template>
 <script>
