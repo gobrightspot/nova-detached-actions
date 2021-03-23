@@ -4,7 +4,7 @@
         :dusk="duskId"
         @click.prevent="click"
         :title="__(action.label)"
-        class="btn btn-default ml-3 detached-action-button flex justify-center items-center"
+        class="btn btn-default ml-3 detached-action-button flex justify-center items-center nova-button"
         :class="action.classes"
     >
         <icon v-if="action.icon" :type="action.icon" width="20" height="20" view-box="0 0 24 24" :class="action.iconClasses" />
