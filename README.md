@@ -107,6 +107,21 @@ public function actions(Request $request)
 }
 ```
 
+## Chunking and repetitive calls to the handle()
+If you initiate an action on the background Nova will chunk up the total amount of records and call the `handle()` function of your DetachedAction for each chunk. This could have unexpected performance impact as the system will perform your action for each chunk of records.
+This happens in the `handleRequest()` function of `\Laravel\Nova\Actions\Action.php`.
+
+To prevent this the simplest way is to overrule this function in your `DetachedAction`. this is a bare example dispatching just a job without any checks or other logic:
+
+```php
+/** @return array<int,string> */
+public function handleRequest(ActionRequest $request): array
+{
+    dispatch(new GenerateTicketReport($request->resolveFields()));
+    return DetachedAction::message('Nice job!');
+}
+```
+
 ### Display on different screens
 
 ##### `showOnIndexToolbar()`
