@@ -112,7 +112,7 @@ abstract class DetachedAction extends Action
     /**
      * Determine if the action is to be shown on the custom index toolbar.
      *
-     * @return self
+     * @return $this
      */
     public function showOnIndexToolbar()
     {
@@ -124,7 +124,7 @@ abstract class DetachedAction extends Action
     /**
      * Determine if the action is to be shown only on the custom index toolbar.
      *
-     * @return self
+     * @return $this
      */
     public function onlyOnIndexToolbar()
     {
@@ -156,7 +156,7 @@ abstract class DetachedAction extends Action
      *
      * @param  bool  $value
      *
-     * @return self
+     * @return $this
      */
     public function onlyOnIndex($value = true)
     {
@@ -171,7 +171,7 @@ abstract class DetachedAction extends Action
     /**
      * Determine if the action is to be shown on the custom detail toolbar.
      *
-     * @return self
+     * @return $this
      */
     public function showOnDetailToolbar()
     {
@@ -183,7 +183,7 @@ abstract class DetachedAction extends Action
     /**
      * Determine if the action is to be shown only on the custom detail toolbar.
      *
-     * @return self
+     * @return $this
      */
     public function onlyOnDetailToolbar()
     {
@@ -203,7 +203,7 @@ abstract class DetachedAction extends Action
      *
      * @param  bool  $value
      *
-     * @return self
+     * @return $this
      */
     public function onlyOnDetail($value = true)
     {
