@@ -331,7 +331,7 @@ abstract class DetachedAction extends Action
      *
      * @return array
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return array_merge([
             'detachedAction' => true,
