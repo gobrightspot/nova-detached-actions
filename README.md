@@ -237,11 +237,11 @@ return [
 
 ### Adding an icon
 
-You can use any of the 104 Heroicon icons by specifying the icon name in lowercase, prefixed with `hero-`:
+You can use any of the 104 Heroicon icons by specifying the icon name in lowercase:
 
 ```php
 return [
-   (new ImportUsers)->icon('hero-add')
+   (new ImportUsers)->icon('add')
 ];
 ```
 
@@ -249,127 +249,10 @@ You can also customize the display of that icon using `iconClasses`:
 
 ```php
 return [
-   (new ImportUsers)->icon('hero-upload')->iconClasses('mr-3 -ml-2')
+   (new ImportUsers)->icon('upload')->iconClasses('mr-3 -ml-2')
 ];
 ```
 
-#### Supported icon types
-    
-##### Heroicons
-
-    - hero-announcement
-    - hero-archive
-    - hero-arrow-down
-    - hero-arrow-left
-    - hero-arrow-right
-    - hero-arrow-up
-    - hero-at-symbol
-    - hero-book
-    - hero-bookmark
-    - hero-briefcase
-    - hero-browser
-    - hero-building
-    - hero-calander
-    - hero-call-incoming
-    - hero-call-outgoing
-    - hero-call
-    - hero-camera
-    - hero-cart
-    - hero-chat
-    - hero-check-circle
-    - hero-cheveron-down
-    - hero-cheveron-left
-    - hero-cheveron-right
-    - hero-cheveron-up
-    - hero-clip
-    - hero-clipboard
-    - hero-clock
-    - hero-code
-    - hero-cog
-    - hero-comment
-    - hero-compass
-    - hero-currency-dollar
-    - hero-dashboard
-    - hero-desktop
-    - hero-download
-    - hero-duplicate
-    - hero-edit
-    - hero-emotion-happy
-    - hero-emotion-sad
-    - hero-exclamation
-    - hero-external-link
-    - hero-file-blank
-    - hero-file-minus
-    - hero-file-plus
-    - hero-file
-    - hero-film
-    - hero-filter
-    - hero-flag
-    - hero-folder-minus
-    - hero-folder-plus
-    - hero-folder
-    - hero-globe
-    - hero-graph-bar
-    - hero-grid
-    - hero-group
-    - hero-hashtag
-    - hero-heart
-    - hero-help
-    - hero-home
-    - hero-image
-    - hero-inbox
-    - hero-information
-    - hero-key
-    - hero-link
-    - hero-location
-    - hero-lock-closed
-    - hero-lock-open
-    - hero-mail
-    - hero-map
-    - hero-menu
-    - hero-microphone
-    - hero-minus-circle
-    - hero-minus-square
-    - hero-minus
-    - hero-mobile
-    - hero-moon
-    - hero-more-horiz
-    - hero-music
-    - hero-news
-    - hero-notification
-    - hero-plus-circle
-    - hero-plus-square
-    - hero-plus
-    - hero-print
-    - hero-puzzle
-    - hero-refresh
-    - hero-repeat
-    - hero-rocket
-    - hero-search
-    - hero-server
-    - hero-speaker
-    - hero-star
-    - hero-store
-    - hero-tablet
-    - hero-tag
-    - hero-thumb-down
-    - hero-thumb-up
-    - hero-trash
-    - hero-trending-down
-    - hero-trending-up
-    - hero-trophy
-    - hero-upload
-    - hero-user-check
-    - hero-user-minus
-    - hero-user-plus
-    - hero-user
-    - hero-video
-    - hero-view
-    - hero-x-circle
-    - hero-x-square
-    - hero-x
-    - hero-zoom-in
-    - hero-zoom-out
 
 ![screenshot](https://i.imgur.com/9PaOxZC.png)
 
