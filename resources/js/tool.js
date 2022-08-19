@@ -23,7 +23,8 @@ Nova.booting((app, store) => {
   );
 
   app.component(
-    "ResourceIndex",
-    require("./nova-components/ResourceIndex.vue").default
+    "ResourceTableToolbar",
+    require("./nova-components/ResourceTableToolbar.vue").default
   );
+
 });
