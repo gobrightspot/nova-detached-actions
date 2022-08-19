@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full justify-end items-center mr-3 ml-1">
+  <div class="flex justify-end items-center mr-3 ml-1">
     <invisible-actions
       class="mr-2"
       v-if="shouldShowInvisibleActions"

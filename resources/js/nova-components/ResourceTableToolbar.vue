@@ -23,9 +23,9 @@
 
       <!-- Toolbar Items -->
       <div class="h-9 ml-auto flex items-center pr-2 md:pr-3">
+        <IndexActions :resourceName="resourceName"></IndexActions>
         <!-- Action Selector -->
         <div class="hidden md:flex px-2">
-          <IndexActions :resourceName="resourceName"></IndexActions>
           <ActionSelector
             v-if="shouldShowActionSelector"
             :resource-name="resourceName"
