@@ -1,6 +1,6 @@
 import _ from 'lodash'
-import {InteractsWithResourceInformation} from 'laravel-nova'
-import HandlesActions from '@nova/mixins/HandlesActions'
+import InteractsWithResourceInformation from '@/mixins/InteractsWithResourceInformation'
+import HandlesActions from '@/mixins/HandlesActions'
 
 export default {
   mixins: [HandlesActions, InteractsWithResourceInformation],
@@ -19,7 +19,7 @@ export default {
   async created() {
     this.getDetachedActions()
 
-    this.$on('actionExecuted', () => {
+    Nova.$on('actionExecuted', () => {
       Nova.$emit('refresh-resources')
     })
   },
