@@ -11,7 +11,7 @@
 
     <action-button
       class="mr-3"
-      v-for="action in visibleActions.reverse()"
+      v-for="action in visibleActions"
       :key="action.uriKey"
       :action="action"
       @action-button-clicked="handleClick"
