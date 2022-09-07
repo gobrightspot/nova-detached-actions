@@ -23,7 +23,11 @@
 
       <!-- Toolbar Items -->
       <div class="h-9 ml-auto flex items-center pr-2 md:pr-3">
-        <IndexActions :resourceName="resourceName"></IndexActions>
+        <IndexActions
+            :resource-name="resourceName"
+            :selected-resources="selectedResourcesForActionSelector"
+        ></IndexActions>
+
         <!-- Action Selector -->
         <div class="hidden md:flex px-2">
           <ActionSelector

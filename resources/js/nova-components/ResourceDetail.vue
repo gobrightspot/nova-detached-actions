@@ -50,7 +50,11 @@
           </div>
 
           <div class="ml-auto flex items-center">
-            <DetailActions :resourceName="resourceName"></DetailActions>
+            <DetailActions
+                :resource-id="resource.id.value"
+                :resource-name="resourceName"
+            ></DetailActions>
+
             <!-- Actions Menu -->
             <DetailActionDropdown
               v-if="resource"

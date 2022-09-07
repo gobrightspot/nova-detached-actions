@@ -8,6 +8,7 @@
       :icon-type="invisibleActionsIcon"
       @dropdown-link-click="handleClick"
     ></invisible-actions>
+
     <action-button
       class="mr-3"
       v-for="action in visibleActions.reverse()"
@@ -15,6 +16,7 @@
       :action="action"
       @action-button-clicked="handleClick"
     ></action-button>
+
     <!-- Confirm Action Modal -->
     <component
       v-if="confirmActionModalOpened"
@@ -47,7 +49,7 @@ export default {
   components: { ActionLink },
   mixins: [DetachedAction],
 
-  props: ["resourceName"],
+  props: ['resourceName', 'selectedResources'],
   methods: {
     handleResponse(response) {
       this.actionsList = _.filter(

@@ -1,20 +1,22 @@
 <template>
   <div class="flex w-full justify-end items-center">
     <invisible-actions
-    class="mr-2"
+      class="mr-2"
       v-if="shouldShowInvisibleActions"
       :actions="invisibleActions.reverse()"
       :show-arrow="showInvisibleActionsArrow"
       :icon-type="invisibleActionsIcon"
       @dropdown-link-click="handleClick"
     ></invisible-actions>
+
     <action-button
-    class="mr-3"
+      class="mr-3"
       v-for="action in visibleActions.reverse()"
       :key="action.uriKey"
       :action="action"
       @action-button-clicked="handleClick"
     ></action-button>
+
     <!-- Confirm Action Modal -->
     <component
       v-if="confirmActionModalOpened"
@@ -46,6 +48,7 @@ import DetachedAction from "../mixins/DetachedAction";
 export default {
   mixins: [DetachedAction],
 
+  props: ['resourceId', 'resourceName'],
   methods: {
     handleResponse(response) {
       this.actionsList = _.filter(
@@ -54,5 +57,10 @@ export default {
       );
     },
   },
+  computed: {
+    selectedResources() {
+      return [this.resourceId];
+    },
+  }
 };
 </script>

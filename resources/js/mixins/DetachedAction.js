@@ -8,7 +8,6 @@ export default {
   data: () => ({
     visibleActionsDefault: 3,
     actionsList: [],
-    selectedResources: 'all',
     confirmActionModalOpened: false,
     invisibleActionsOpen: false,
   }),
