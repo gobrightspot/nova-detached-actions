@@ -53,6 +53,7 @@
             <DetailActions
                 :resource-id="resource.id.value"
                 :resource-name="resourceName"
+                @actionExecuted="getResources"
             ></DetailActions>
 
             <!-- Actions Menu -->

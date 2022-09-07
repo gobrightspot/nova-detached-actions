@@ -26,6 +26,7 @@
         <IndexActions
             :resource-name="resourceName"
             :selected-resources="selectedResourcesForActionSelector"
+            @actionExecuted="getResources"
         ></IndexActions>
 
         <!-- Action Selector -->
