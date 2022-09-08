@@ -9,13 +9,15 @@
       @dropdown-link-click="handleClick"
     ></invisible-actions>
 
-    <action-button
-      class="mr-3"
-      v-for="action in visibleActions"
-      :key="action.uriKey"
-      :action="action"
-      @action-button-clicked="handleClick"
-    ></action-button>
+    <template v-for="action in visibleActions">
+      <action-button
+          class="mr-3"
+          v-if="shouldShowActions || action.standalone"
+          :key="action.uriKey"
+          :action="action"
+          @action-button-clicked="handleClick"
+      ></action-button>
+    </template>
 
     <!-- Confirm Action Modal -->
     <component
@@ -48,7 +50,7 @@ import DetachedAction from "../mixins/DetachedAction";
 export default {
   mixins: [DetachedAction],
 
-  props: ['resourceId', 'resourceName'],
+  props: ['shouldShowActions', 'resourceId', 'resourceName'],
   methods: {
     handleResponse(response) {
       this.actionsList = _.filter(

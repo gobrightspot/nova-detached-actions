@@ -51,6 +51,7 @@
 
           <div class="ml-auto flex items-center">
             <DetailActions
+                :should-show-actions="shouldShowActionSelector"
                 :resource-id="resource.id.value"
                 :resource-name="resourceName"
                 @actionExecuted="getResources"

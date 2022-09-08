@@ -24,6 +24,7 @@
       <!-- Toolbar Items -->
       <div class="h-9 ml-auto flex items-center pr-2 md:pr-3">
         <IndexActions
+            :should-show-actions="shouldShowActionSelector"
             :resource-name="resourceName"
             :selected-resources="selectedResourcesForActionSelector"
             @actionExecuted="getResources"

@@ -9,13 +9,15 @@
       @dropdown-link-click="handleClick"
     ></invisible-actions>
 
-    <action-button
-      class="mr-3"
-      v-for="action in visibleActions"
-      :key="action.uriKey"
-      :action="action"
-      @action-button-clicked="handleClick"
-    ></action-button>
+    <template v-for="action in visibleActions">
+      <action-button
+          class="mr-3"
+          v-if="shouldShowActions || action.standalone"
+          :key="action.uriKey"
+          :action="action"
+          @action-button-clicked="handleClick"
+      ></action-button>
+    </template>
 
     <!-- Confirm Action Modal -->
     <component
@@ -49,7 +51,7 @@ export default {
   components: { ActionLink },
   mixins: [DetachedAction],
 
-  props: ['resourceName', 'selectedResources'],
+  props: ['shouldShowActions', 'resourceName', 'selectedResources'],
   methods: {
     handleResponse(response) {
       this.actionsList = _.filter(
