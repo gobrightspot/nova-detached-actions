@@ -232,7 +232,7 @@ abstract class DetachedAction extends Action
      *
      * @return bool
      */
-    public function shownOnIndexToolbar()
+    public function shownOnIndex()
     {
         return $this->showOnIndexToolbar;
     }
@@ -242,7 +242,7 @@ abstract class DetachedAction extends Action
      *
      * @return bool
      */
-    public function shownOnDetailToolbar()
+    public function shownOnDetail()
     {
         return $this->showOnDetailToolbar;
     }
@@ -336,8 +336,8 @@ abstract class DetachedAction extends Action
         return array_merge([
             'detachedAction' => true,
             'label' => $this->label(),
-            'showOnIndexToolbar' => $this->shownOnIndexToolbar(),
-            'showOnDetailToolbar' => $this->shownOnDetailToolbar(),
+            'showOnIndexToolbar' => $this->shownOnIndex(),
+            'showOnDetailToolbar' => $this->shownOnDetail(),
             'classes' => $this->getClasses(),
             'icon' => $this->icon,
             'iconClasses' => $this->iconClasses,

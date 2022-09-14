@@ -1,13 +1,13 @@
 <template>
   <div class="flex justify-end items-center mr-3 ml-1">
-    <invisible-actions
+    <invisible-actions-dropdown
       class="mr-2"
       v-if="shouldShowInvisibleActions"
-      :actions="invisibleActions.reverse()"
+      :actions="invisibleActions"
       :show-arrow="showInvisibleActionsArrow"
       :icon-type="invisibleActionsIcon"
       @dropdown-link-click="handleClick"
-    ></invisible-actions>
+    ></invisible-actions-dropdown>
 
     <template v-for="action in visibleActions">
       <action-button
@@ -45,20 +45,18 @@
 </template>
 <script>
 import DetachedAction from "../mixins/DetachedAction";
-import ActionLink from "./ActionButton";
 
 export default {
-  components: { ActionLink },
   mixins: [DetachedAction],
 
-  props: ['shouldShowActions', 'resourceName', 'selectedResources'],
-  methods: {
-    handleResponse(response) {
-      this.actionsList = _.filter(
-        response.data.actions,
-        (action) => action.showOnIndexToolbar
-      );
+  props: ['shouldShowActions', 'resourceName', 'resourceId', 'actions', 'selectedResources'],
+  watch: {
+    actions(newActions, oldActions) {
+      this.actionsList = newActions.filter((action) => action.hasOwnProperty('detachedAction'));
     },
   },
+  mounted() {
+    this.actionsList = this.actions;
+  }
 };
 </script>

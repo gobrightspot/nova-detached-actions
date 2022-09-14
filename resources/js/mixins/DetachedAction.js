@@ -6,18 +6,13 @@ export default {
   mixins: [HandlesActions, InteractsWithResourceInformation],
 
   data: () => ({
-    visibleActionsDefault: 3,
+    visibleActionsDefaultLimit: 3,
     actionsList: [],
     confirmActionModalOpened: false,
     invisibleActionsOpen: false,
   }),
 
-  /**
-   * Mount the component and retrieve its initial data.
-   */
-  async created() {
-    this.getDetachedActions()
-
+  created() {
     Nova.$on('actionExecuted', () => {
       Nova.$emit('refresh-resources')
     })
@@ -25,29 +20,9 @@ export default {
 
   methods: {
     /**
-     * Get the actions available for the current resource.
-     */
-    getDetachedActions() {
-      this.actionsList = []
-      return Nova.request()
-        .get(`/nova-api/${this.resourceName}/actions`, {
-          params: {
-            viaResource: this.viaResource,
-            viaResourceId: this.viaResourceId,
-            viaRelationship: this.viaRelationship,
-            relationshipType: this.relationshipType
-          }
-        })
-        .then(response => {
-          this.handleResponse(response)
-        })
-    },
-
-    /**
      * Determine whether the action should redirect or open a confirmation modal
      */
     determineActionStrategy(action) {
-
       this.selectedActionKey = action.uriKey;
 
       if (this.selectedAction.withoutConfirmation) {
@@ -69,10 +44,10 @@ export default {
 
   computed: {
     /**
-     * Get all of the detached actions.
+     * Get all the detached actions.
      */
     detachedActions() {
-      return _.filter(this.allActions, a => a.detachedAction || false)
+      return _.filter(this.actionsList, action => action.detachedAction || false)
     },
 
     /**
@@ -97,14 +72,7 @@ export default {
     visibleActionsLimit() {
       return this.resourceInformation.hasOwnProperty('visibleActionsLimit')
         ? this.resourceInformation.visibleActionsLimit
-        : this.visibleActionsDefault;
-    },
-
-    /**
-     * Get all of the available actions.
-     */
-    allActions() {
-      return this.actionsList
+        : this.visibleActionsDefaultLimit;
     },
 
     /**
