@@ -12,12 +12,6 @@ export default {
     invisibleActionsOpen: false,
   }),
 
-  created() {
-    Nova.$on('actionExecuted', () => {
-      Nova.$emit('refresh-resources')
-    })
-  },
-
   methods: {
     /**
      * Determine whether the action should redirect or open a confirmation modal

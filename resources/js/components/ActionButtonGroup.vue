@@ -55,7 +55,7 @@ export default {
       this.actionsList = newActions.filter((action) => action.hasOwnProperty('detachedAction'));
     },
   },
-  mounted() {
+  created() {
     this.actionsList = this.actions;
   }
 };
