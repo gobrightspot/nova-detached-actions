@@ -49,12 +49,49 @@ import DetachedAction from "../mixins/DetachedAction";
 export default {
   mixins: [DetachedAction],
 
-  props: ['shouldShowActions', 'resourceName', 'resourceId', 'actions', 'selectedResources'],
+  props: ['shouldShowActions', 'resourceName', 'resourceId', 'actions', 'endpoint', 'actionQueryString', 'selectedResources'],
+
   watch: {
     actions(newActions, oldActions) {
       this.actionsList = newActions.filter((action) => action.hasOwnProperty('detachedAction'));
     },
   },
+
+  computed: {
+    currentSearch() {
+      return this.actionQueryString.currentSearch
+    },
+
+    encodedFilters() {
+      return this.actionQueryString.encodedFilters
+    },
+
+    currentTrashed() {
+      return this.actionQueryString.currentTrashed
+    },
+
+    viaResource() {
+      return this.actionQueryString.viaResource
+    },
+
+    viaResourceId() {
+      return this.actionQueryString.viaResourceId
+    },
+
+    viaRelationship() {
+      return this.actionQueryString.viaRelationship
+    },
+
+    actionsForSelect() {
+      return [
+        ...this.visibleActions.map(a => ({
+          value: a.uriKey,
+          label: a.name,
+        })),
+      ]
+    },
+  },
+
   created() {
     this.actionsList = this.actions;
   }

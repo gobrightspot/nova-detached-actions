@@ -55,6 +55,8 @@
                 :resource-name="resourceName"
                 :resource-id="resource.id.value"
                 :actions="actions"
+                :endpoint="actionsEndpoint"
+                :action-query-string="actionQueryString"
                 :selected-resources="computedSelectedResources"
                 @actionExecuted="actionExecuted"
             ></ActionButtonGroup>
@@ -104,6 +106,7 @@ import Detail from "@/views/Detail";
 
 export default {
   extends: Detail,
+
   computed: {
     computedActions() {
       return this.actions.length

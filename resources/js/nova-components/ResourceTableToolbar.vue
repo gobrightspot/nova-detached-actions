@@ -27,6 +27,8 @@
             :should-show-actions="computedShouldShowActionSelector"
             :resource-name="resourceName"
             :actions="availableActions"
+            :endpoint="actionsEndpoint"
+            :action-query-string="actionQueryString"
             :selected-resources="selectedResourcesForActionSelector"
             @actionExecuted="getResources"
         ></ActionButtonGroup>
