@@ -50,12 +50,22 @@
           </div>
 
           <div class="ml-auto flex items-center">
-            <DetailActions :resourceName="resourceName"></DetailActions>
+            <ActionButtonGroup
+                :should-show-actions="computedShouldShowActions"
+                :resource-name="resourceName"
+                :resource-id="resource.id.value"
+                :actions="actions"
+                :endpoint="actionsEndpoint"
+                :action-query-string="actionQueryString"
+                :selected-resources="computedSelectedResources"
+                @actionExecuted="actionExecuted"
+            ></ActionButtonGroup>
+
             <!-- Actions Menu -->
             <DetailActionDropdown
               v-if="resource"
               :resource="resource"
-              :actions="actions"
+              :actions="computedActions"
               :via-resource="viaResource"
               :via-resource-id="viaResourceId"
               :via-relationship="viaRelationship"
@@ -96,5 +106,24 @@ import Detail from "@/views/Detail";
 
 export default {
   extends: Detail,
+
+  computed: {
+    computedActions() {
+      return this.actions.length
+          ? this.actions.filter(action => !action.hasOwnProperty('detachedAction'))
+          : this.actions;
+    },
+    computedStandaloneActions() {
+      return this.computedActions.length
+          ? this.computedActions.filter(action => action.standalone)
+          : this.computedActions;
+    },
+    computedShouldShowActions() {
+      return this.computedSelectedResources.length > 0 || this.computedStandaloneActions.length > 0
+    },
+    computedSelectedResources() {
+      return [this.resource.id.value];
+    },
+  }
 };
 </script>
